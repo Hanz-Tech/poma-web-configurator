@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pocket Operator MIDI adapter Web Config</title>
+  <meta http-equiv="origin-trial" content="AiM0rMslVx2jumsJjQ144QeZTScNmGVMYzBuXoaMQwCd7UHWbQH8Rg20adCN7XWaTMai4HvsUIyx3+blPPiupwEAAABreyJvcmlnaW4iOiJodHRwczovL3VuamF2YXNjcmlwdGVyLXdlYi1zZXJpYWwtZXhhbXBsZS5nbGl0Y2gubWU6NDQzIiwiZmVhdHVyZSI6IlNlcmlhbCIsImV4cGlyeSI6MTU5Njk3OTA1NX0=">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,100&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <main>
+    <div class="repo-link">
+      <a href="https://github.com/UnJavaScripter/web-serial-example">GitHub Repo</a>
+    </div>
+    <section class="elements">
+      <div class="element">
+        <div class="read-write-button-container">
+          <button class="action-buttons" id="connect-to-serial">Connect</button>
+          <button class="action-buttons" data-value="READ" id="read-po-buttons-config" disabled="false">Read from POMA</button>
+          <button class="action-buttons" data-value="SAVE" id="write-po-buttons-config" disabled="false">Save to POMA</button>
+        </div>
+        
+      </div>
+      <div class="element">
+        <h2>PO buttons config</h2>
+        <p>MIDI notes</p>
+        <div class="grid-container">
+          <div class="po-button-config-grid">
+            <div class="grid-element" >
+              <label for="midi_note_sound">SND</label>
+              <input type="text" id="midi_note_sound" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_pattern" >PAT</label>
+              <input type="text" id="midi_note_pattern" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_bpm">BPM</label>
+              <input type="text" id="midi_note_bpm" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="N/A"></label>
+            </div>
+            <div class="grid-element" >
+              <label for="N/A"></label>
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_1">1</label>
+              <input type="text" id="midi_note_1" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_2" >2</label>
+              <input type="text" id="midi_note_2" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_3" >3</label>
+              <input type="text" id="midi_note_3" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_4">4</label>
+              <input type="text" id="midi_note_4" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for=midi_note_special">SPE</label>
+              <input type="text" id="midi_note_special" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_5" >5</label>
+              <input type="text" id="midi_note_5" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_6">6</label>
+              <input type="text" id="midi_note_6" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_7">7</label>
+              <input type="text" id="midi_note_7" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_8">8</label>
+              <input type="text" id="midi_note_8" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_fx">FX</label>
+              <input type="text" id="midi_note_fx" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_9">9</label>
+              <input type="text" id="midi_note_9" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_10">10</label>
+              <input type="text" id="midi_note_10" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_11">11</label>
+              <input type="text" id="midi_note_11" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_12">12</label>
+              <input type="text" id="midi_note_12" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_play">PLAY</label>
+              <input type="text" id="midi_note_play" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_13">13</label>
+              <input type="text" id="midi_note_13" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_14">14</label>
+              <input type="text" id="midi_note_14" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_15">15</label>
+              <input type="text" id="midi_note_15" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_16">16</label>
+              <input type="text" id="midi_note_16" class="message-text-input" value="0">
+            </div>
+            <div class="grid-element" >
+              <label for="midi_note_write">WRITE</label>
+              <input type="text" id="midi_note_write" class="message-text-input" value="0">
+            </div>
+            <!-- Repeat the above button code 21 more times to create a 5x5 grid -->
+          </div>
+        </div>
+
+      </div>
+      <div class="element">
+        <h2>Get a message back:</h2>
+        <ol id="serial-messages-container"></ol>
+      </div>
+    </section>
+  </main>
+  
+  <script src="./dist/serial-handler.js" type="module"></script>
+  <script src="./dist/app.js" type="module"></script>
+</body>
+</html>
