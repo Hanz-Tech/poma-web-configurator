@@ -19,23 +19,29 @@
       <div class="element">
         <ol class="myUL">
           <li>Connect to the PO-MA by USB, SD card not required</li>
-          <li>Read the values from the PO-MA</li>
-          <li>Make your changes</li>
-          <li>Save the new values</li>
+          <li>Read the <span style="color:green">green</span> values from the PO-MA. </li> 
+          <li>Copy the config or load existing config file to the <span style="color:red">red</span> values. Make your changes.</li> 
+          <li>Save the <span style="color:red">red</span> values to the adapter, <span style="color:green">green</span> values will auto update</li>
+          <li>The export function export <span style="color:green">green</span> values to a file</li>
         </ol>
         <div class="read-write-button-container">
           <button class="action-buttons" id="connect-to-serial">Connect</button>
-          <button class="action-buttons"  id="read-from-po-button" disabled="false">Read From Device</button>
-          <button class="action-buttons"  id="save-to-po-button" disabled="false">Save to Device</button>
-          <button class="action-buttons"  id="load-config-button">Load Config File</button>
+          <button class="action-buttons"  id="read-from-po-button" disabled="true">Read From Adapter</button>
+        </div>
+        <div class="read-write-button-container">
+          <button class="action-buttons"  id="copy-config-button" disabled="true" >Copy Adapter Config</button>
+          <button class="action-buttons"  id="load-config-button" disabled="true" >Load Config File</button>
           <input type="file" id="fileInput" style="display: none;" accept=".json" />
-          <button class="action-buttons"  id="export-config-button">Export Device Config</button>
+        </div>
+        <div class="read-write-button-container">
+          <button class="action-buttons"  id="save-to-po-button" disabled="true">Save to Adapter</button>
+          <button class="action-buttons"  id="export-config-button" disabled="true">Export Current Config</button>
         </div>
         
       </div>
       <div class="element">
-        <h2>PO buttons/MIDI notes</h2>
-        <p class="tips">Two values for each element, top values are read from device, <span style="color:red">bottom</span> values will be saved to the device </p>
+        <h2>MIDI notes to PO buttons </h2>
+        <p class="tips">Each button is assigned to a MIDI note</p>
         <div class="grid-container">
           <div class="po-button-config-grid">
             <div class="grid-element" >
@@ -169,7 +175,8 @@
     </section>
   </main>
   
-  <script src="./dist/serial-handler.js" type="module"></script>
-  <script src="./dist/app.js" type="module"></script>
+  <!-- <script src="./dist/serial-handler.js" type="module"></script>
+  <script src="./dist/app.js" type="module"></script> -->
+  <script src="./dist/bundle.js" type="module"></script>
 </body>
 </html>

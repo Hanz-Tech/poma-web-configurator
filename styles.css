@@ -114,7 +114,6 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 1rem;
 }
 
 .action-buttons {
@@ -137,8 +136,8 @@ ol {
 
 .message-text {
   font-size: 0.75rem;
-  color: white;
-  margin-top: 0.313rem;
+  color: green;
+  margin-top: 0.5rem;
 }
 
 .tips {

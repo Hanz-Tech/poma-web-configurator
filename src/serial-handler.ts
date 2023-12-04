@@ -12,11 +12,12 @@ type UsbDeviceFilter = {
 class SerialHandler {
   reader: ReadableStreamDefaultReader;
   writer: WritableStreamDefaultWriter;
-  encoder = new TextEncoder();
-  decoder = new TextDecoder();
   port: SerialPort
   textDecoder: TextDecoderStream  = new TextDecoderStream();
+  textEncoder: TextEncoderStream = new TextEncoderStream();
   readableStreamClosed: Promise<void>
+  writableStreamClosed: Promise<void>
+
   /**
    * Triggers the menu where the user will pick a device (it requires an user interaction to be triggered).
    * Opens the port selected by the user in the UI using a defined `baudRate`; this example uses a hard-coded value of 9600.
@@ -42,7 +43,8 @@ class SerialHandler {
         
         await this.port.open({ baudRate: 115200 }); // `baudRate` was `baudrate` in previous versions.
         if (this.port.writable != null) {
-          this.writer = this.port.writable.getWriter();
+          this.writableStreamClosed = this.textEncoder.readable.pipeTo(this.port.writable);
+          this.writer = this.textEncoder.writable.getWriter();
         } else {
           throw Error("Port it not writable");
         }
@@ -76,8 +78,7 @@ class SerialHandler {
    * @returns An empty promise after the message has been written.
    */ 
   async write(data: string): Promise<void> {
-    const dataArrayBuffer = this.encoder.encode(data);
-    return await this.writer.write(dataArrayBuffer);
+    return await this.writer.write(data);
   }
 
   /**
@@ -102,19 +103,8 @@ class SerialHandler {
       }
       
     }
-    console.log(completeMessage)
     return completeMessage
   }
-  // async read(): Promise<string> {
-  //   try {
-  //     const readerData = await this.reader.read();
-  //     return this.decoder.decode(readerData.value);
-  //   } catch (err) {
-  //     const errorMessage = `error reading data: ${err}`;
-  //     console.error(errorMessage);
-  //     return errorMessage;
-  //   }
-  // }
   async _requestPort(): Promise<SerialPort> {
     try {
         return await navigator.serial.requestPort({

@@ -1,5 +1,6 @@
-import { serialHandler } from './serial-handler.js';
-import { eepromAddresses, defaultConfig } from './default.js';
+import { serialHandler } from './serial-handler';
+import { eepromAddresses, defaultConfig } from './default';
+import {validateConfig} from './validator'
 /**
  * UI specific code
  * This code is only meant to handle the elements and interactions in this example.
@@ -14,6 +15,7 @@ class App {
   readFromPoButton = <HTMLButtonElement>document.getElementById('read-from-po-button')!;
   saveToPoButton = <HTMLButtonElement>document.getElementById('save-to-po-button')!;
   loadConfigFileButton = <HTMLButtonElement>document.getElementById('load-config-button')!;
+  copyConfigButton = <HTMLButtonElement>document.getElementById('copy-config-button')!;
   fileInput = document.getElementById('fileInput') as HTMLInputElement;
   exportConfigFileButton = <HTMLButtonElement>document.getElementById('export-config-button')!;
   actionButtons = document.querySelectorAll<HTMLButtonElement>('.action-buttons')!;
@@ -45,15 +47,24 @@ class App {
             // Assuming the file contains JSON
             const text = e.target?.result as string;
             const json = JSON.parse(text);
-            this.showConfigJSON(json, '_new')
-            this.printToLogs("JSON File loaded")
+            if(validateConfig(json)){
+              this.newDeviceConfig = JSON.parse(text);
+              this.showConfigJSON(this.newDeviceConfig, '_new')
+              this.printToLogs("JSON File loaded");
+              (this.saveToPoButton as HTMLButtonElement).removeAttribute('disabled');
+            } else {
+              this.printToLogs('Error validating config file:' + JSON.stringify(validateConfig.errors));
+              alert(`Error: Invalid config file`);
+            }
+
           } catch (error) {
-            this.printToLogs('Error parsing JSON:' + error);
+            this.printToLogs('Error parsing JSON:' + JSON.stringify(error));
+            alert(`Error: Invalid config file`);
           }
         };
   
         reader.onerror = (e) => {
-          console.error('Error reading file:', e);
+           this.printToLogs('Error reading file: ' + e);
         };
   
         reader.readAsText(file); // Read the file as text
@@ -67,10 +78,17 @@ class App {
     this.readFromPoButton.addEventListener('pointerdown', async () => {
       await serialHandler.write(String("READALL"));
       const response = await serialHandler.read();
-      this.currentDeviceConfig = JSON.parse(response)
-      this.showConfigJSON(this.currentDeviceConfig, "_old");
-      this.printToLogs("Config Read From Device");
-      (this.saveToPoButton as HTMLButtonElement).removeAttribute('disabled');
+      const json = JSON.parse(response)
+      if(validateConfig(json)){
+        this.currentDeviceConfig = JSON.parse(response)
+        this.showConfigJSON(this.currentDeviceConfig, "_old");
+        this.printToLogs("Config Read From Device");
+        (this.loadConfigFileButton as HTMLButtonElement).removeAttribute('disabled');
+        (this.exportConfigFileButton as HTMLButtonElement).removeAttribute('disabled');
+        (this.copyConfigButton as HTMLButtonElement).removeAttribute('disabled');
+      } else {
+        this.printToLogs('Error validating JSON:' + JSON.stringify(validateConfig.errors));
+      }
     });
 
     //Save to device
@@ -82,6 +100,14 @@ class App {
     //Load File
     this.loadConfigFileButton.addEventListener('pointerdown', async () => {
       this.fileInput.click(); // Simulate click on the hidden file input when the button is clicked
+    })
+
+    //Copy Config
+    this.copyConfigButton.addEventListener('pointerdown', async () => {
+      this.newDeviceConfig = this.currentDeviceConfig;
+      this.showConfigJSON(this.newDeviceConfig, "_new");
+      this.printToLogs("Config Copied");
+      (this.saveToPoButton as HTMLButtonElement).removeAttribute('disabled');
     })
   }
 
