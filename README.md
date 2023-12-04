@@ -2,6 +2,13 @@
 
 Simple app to configure the PO Midi Adapter through a web app using Web Serial API
 
+
+# Dev mode
+```
+npm install
+npm run dev
+```
+
 ### Browser compatibility
 
 So far only Chromium has shipped this API, so you can expect it to work on Chrome, Edge, and Opera. Check [this table](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API#browser_compatibility) for the latest browser compatibility details.
