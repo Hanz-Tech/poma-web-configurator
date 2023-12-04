@@ -23,7 +23,7 @@
     "build": "tsc",
     "start": "http-server -c-1",
     "open-chrome": "start chrome http://localhost:8080",
-    "watch": "nodemon --watch src --ext ts --exec npm run build-webpack:prod",
+    "watch": "nodemon --watch src --ext ts --exec npm run build-webpack",
     "dev": "concurrently \"npm:watch\" \"npm:start\" \"npm:open-chrome\""
   },
   "repository": {

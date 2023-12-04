@@ -89,7 +89,6 @@ class SerialHandler {
     let completeMessage = ""
     while (true) {
       const { value, done } = await this.reader.read();
-      console.log(done)
       if (done) {
         // Allow the serial port to be closed later.
         this.reader.releaseLock();

@@ -1,6 +1,7 @@
 import { serialHandler } from './serial-handler';
 import { eepromAddresses, defaultConfig } from './default';
 import {validateConfig} from './validator'
+import { compareJSONObjects } from './helper';
 /**
  * UI specific code
  * This code is only meant to handle the elements and interactions in this example.
@@ -8,7 +9,7 @@ import {validateConfig} from './validator'
  * If you're not familiar with TypeScript code, just ignore the `<TYPE>` and `:TYPE` parts.
  */
 interface configMap {
-  [id: string]: string;
+  [id: string]: number;
 }
 class App {
   connectButtonElem = <HTMLButtonElement>document.getElementById('connect-to-serial')!;
@@ -21,7 +22,7 @@ class App {
   actionButtons = document.querySelectorAll<HTMLButtonElement>('.action-buttons')!;
   messageInput = <HTMLInputElement>document.getElementById('message-input')!;
   submitButton = <HTMLElement>document.getElementById('submit-button')!;
-  serialMessagesContainer = <HTMLOListElement>document.getElementById('serial-messages-container')!;
+  serialMessagesContainer = <HTMLOListElement>document.getElementById('logs-container')!;
   currentDeviceConfig: configMap = defaultConfig;
   newDeviceConfig : configMap = defaultConfig
   isInit: boolean = false
@@ -30,7 +31,7 @@ class App {
     this.connectButtonElem.addEventListener('pointerdown', async () => {
       this.isInit = await serialHandler.init();
       (this.readFromPoButton as HTMLButtonElement).removeAttribute('disabled');
-      // this.showConfigJSON(this.currentConfig);
+      // this.updateConfigWebpage(this.currentConfig);
       (this.connectButtonElem as HTMLButtonElement).setAttribute('disabled', "true")
       this.printToLogs("Connected to Device")
       this.isConnected = true
@@ -46,10 +47,9 @@ class App {
           try {
             // Assuming the file contains JSON
             const text = e.target?.result as string;
-            const json = JSON.parse(text);
-            if(validateConfig(json)){
-              this.newDeviceConfig = JSON.parse(text);
-              this.showConfigJSON(this.newDeviceConfig, '_new')
+            const loadedConfig: configMap = JSON.parse(text);
+            if(validateConfig(loadedConfig)){
+              this.updateConfigWebpage(loadedConfig, '_new')
               this.printToLogs("JSON File loaded");
               (this.saveToPoButton as HTMLButtonElement).removeAttribute('disabled');
             } else {
@@ -78,10 +78,10 @@ class App {
     this.readFromPoButton.addEventListener('pointerdown', async () => {
       await serialHandler.write(String("READALL"));
       const response = await serialHandler.read();
-      const json = JSON.parse(response)
-      if(validateConfig(json)){
-        this.currentDeviceConfig = JSON.parse(response)
-        this.showConfigJSON(this.currentDeviceConfig, "_old");
+      const loadedConfig: configMap = JSON.parse(response)
+      if(validateConfig(loadedConfig)){
+        this.currentDeviceConfig = loadedConfig
+        this.updateConfigWebpage(this.currentDeviceConfig, "_old");
         this.printToLogs("Config Read From Device");
         (this.loadConfigFileButton as HTMLButtonElement).removeAttribute('disabled');
         (this.exportConfigFileButton as HTMLButtonElement).removeAttribute('disabled');
@@ -93,8 +93,28 @@ class App {
 
     //Save to device
     this.saveToPoButton.addEventListener('pointerdown', async () => {
-      await serialHandler.write(String("SAVEALL"));
-      this.getSerialMessage();
+      this.newDeviceConfig = this.fetchConfigWebpage(defaultConfig);
+      const valuesToSave = compareJSONObjects(this.currentDeviceConfig,this.newDeviceConfig)
+      // console.log(valuesToSave)
+      // console.log(Object.keys(valuesToSave).length)
+      for (const k in valuesToSave) {
+        if (valuesToSave.hasOwnProperty(k)) {
+          // Use k to get the corresponding EEPROM address
+          const address = eepromAddresses[k];
+      
+          // Check if the address is defined in the eepromAddresses mapping
+          if (address !== undefined) {
+            // Now you have the setting key, value, and corresponding EEPROM address
+            const newValue = valuesToSave[k]
+            this.printToLogs(`Update "${k}" to value ${newValue} and EEPROM address ${address}.`);
+            await serialHandler.write(String("SAVEALL"));
+            await this.getSerialMessage()
+            // You can perform further operations with the setting key, value, and address here
+          } else {
+            this.printToLogs(`WARNING : EEPROM address for setting "${k}" not found.`);
+          }
+        }
+      }
     });
 
     //Load File
@@ -104,39 +124,55 @@ class App {
 
     //Copy Config
     this.copyConfigButton.addEventListener('pointerdown', async () => {
-      this.newDeviceConfig = this.currentDeviceConfig;
-      this.showConfigJSON(this.newDeviceConfig, "_new");
+      this.updateConfigWebpage(this.currentDeviceConfig, "_new");
       this.printToLogs("Config Copied");
       (this.saveToPoButton as HTMLButtonElement).removeAttribute('disabled');
     })
   }
 
   /**
-  Show the new config on the webpage
+  Show the config on the webpage
  */
-  showConfigJSON(config : configMap, type : string) {
+  updateConfigWebpage(config : configMap, type : string) {
     Object.keys(config).forEach(id => {
       const inputElement = document.getElementById(id + type) as HTMLInputElement | null;
       if (inputElement) {
           //for <span> values
           if (type === "_old"){
-            inputElement.textContent = config[id];
+            inputElement.textContent = config[id].toString();
           } else {
-            inputElement.value = config[id];
+            inputElement.value = config[id].toString();
           }
 
       } 
     });
   }
 
+  /**
+  Fetch the new config from the webpage
+ */
+  fetchConfigWebpage(config : configMap) : configMap {
+    const configCopy = { ...config };
+    Object.keys(configCopy).forEach(id => {
+      const inputElement = document.getElementById(id + "_new") as HTMLInputElement | null;
+      if (inputElement) {
+        const inputInt = parseInt(inputElement.value)
+        configCopy[id] = inputInt
+      } 
+    });
+    if(!validateConfig(configCopy)){
+      alert('Error: Invalid config, check logs for details');
+      this.printToLogs('Error validating config:' + JSON.stringify(validateConfig.errors));
+      return this.currentDeviceConfig 
+    }
+    return configCopy
+  }
+
   async getSerialMessage() {
     const now = new Date();
     const listElement = document.createElement('li');
-    console.log("before")
     const message = await serialHandler.read()
-    console.log("after")
-    console.log(message)
-    listElement.innerText = `Message received at ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}.${now.getMilliseconds()}: ${message}`;
+    listElement.innerText = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}.${now.getMilliseconds()}: ${message}`;
     this.serialMessagesContainer.appendChild(listElement);
   }
 

@@ -18,18 +18,21 @@
     <section class="elements">
       <div class="element">
         <ol class="myUL">
-          <li>Connect to the PO-MA by USB, SD card not required</li>
-          <li>Read the <span style="color:green">green</span> values from the PO-MA. </li> 
-          <li>Copy the config or load existing config file to the <span style="color:red">red</span> values. Make your changes.</li> 
-          <li>Save the <span style="color:red">red</span> values to the adapter, <span style="color:green">green</span> values will auto update</li>
-          <li>The export function export <span style="color:green">green</span> values to a file</li>
+          <li>Remove the PO-MA from the Pocket Operator,Remove SD card not required</li>
+          <li>Attach the PO-MA to your PC thru USB</li>
+          <li>Press Connect, and select the correct device</li>
+          <li>Press READ FROM ADAPTER to load config from the PO-MA. The values are <span style="color:green">green</span> </li> 
+          <li>Press COPY or LOAD CONFIG FILE to update the <span style="color:red">red</span> values. Make your changes.</li> 
+          <li>Press SAVE TO ADAPTER to send <span style="color:red">red</span> values to the adapter, <span style="color:green">green</span> values will auto update</li>
+          <li>Pesss EXPORT CURRENT CONFIG to export <span style="color:green">green</span> values to a file</li>
+          <li>SD card is not longer required</li>
         </ol>
         <div class="read-write-button-container">
           <button class="action-buttons" id="connect-to-serial">Connect</button>
           <button class="action-buttons"  id="read-from-po-button" disabled="true">Read From Adapter</button>
         </div>
         <div class="read-write-button-container">
-          <button class="action-buttons"  id="copy-config-button" disabled="true" >Copy Adapter Config</button>
+          <button class="action-buttons"  id="copy-config-button" disabled="true" >Copy </button>
           <button class="action-buttons"  id="load-config-button" disabled="true" >Load Config File</button>
           <input type="file" id="fileInput" style="display: none;" accept=".json" />
         </div>
@@ -41,23 +44,23 @@
       </div>
       <div class="element">
         <h2>MIDI notes to PO buttons </h2>
-        <p class="tips">Each button is assigned to a MIDI note</p>
+        <p class="tips">Assign a MIDI note to trigger PO button. Set value to -1 to ignore</p>
         <div class="grid-container">
           <div class="po-button-config-grid">
             <div class="grid-element" >
               <label for="midi_note_sound_old">SND</label>
               <span id="midi_note_sound_old" class="message-text" >n/a</span>
-              <input type="text" id="midi_note_sound_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_sound_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element" >
               <label for="midi_note_patter_old" >PAT</label>
               <span id="midi_note_pattern_old" class="message-text" >n/a</span>
-              <input type="text" id="midi_note_pattern_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_pattern_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element" >
               <label for="midi_note_bpm_old">BPM</label>
               <span id="midi_note_bpm_old" class="message-text" >n/a</span>
-              <input type="text" id="midi_note_bpm_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_bpm_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element" >
             </div>
@@ -66,102 +69,102 @@
             <div class="grid-element">
               <label for="midi_note_1_new">1</label>
               <span id="midi_note_1_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_1_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_1_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_2_new">2</label>
               <span id="midi_note_2_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_2_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_2_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_3_new">3</label>
               <span id="midi_note_3_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_3_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_3_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_4_new">4</label>
               <span id="midi_note_4_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_4_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_4_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_special_new">SPE</label>
               <span id="midi_note_special_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_special_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_special_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_5_new">5</label>
               <span id="midi_note_5_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_5_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_5_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_6_new">6</label>
               <span id="midi_note_6_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_6_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_6_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_7_new">7</label>
               <span id="midi_note_7_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_7_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_7_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_8_new">8</label>
               <span id="midi_note_8_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_8_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_8_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_fx_new">FX</label>
               <span id="midi_note_fx_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_fx_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_fx_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_9_new">9</label>
               <span id="midi_note_9_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_9_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_9_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_10_new">10</label>
               <span id="midi_note_10_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_10_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_10_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_11_new">11</label>
               <span id="midi_note_11_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_11_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_11_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_12_new">12</label>
               <span id="midi_note_12_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_12_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_12_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_play_new">PLAY</label>
               <span id="midi_note_play_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_play_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_play_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_13_new">13</label>
               <span id="midi_note_13_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_13_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_13_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_14_new">14</label>
               <span id="midi_note_14_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_14_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_14_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_15_new">15</label>
               <span id="midi_note_15_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_15_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_15_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_16_new">16</label>
               <span id="midi_note_16_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_16_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_16_new" class="message-text-input" value="-1">
             </div>
             <div class="grid-element">
               <label for="midi_note_write_new">WRITE</label>
               <span id="midi_note_write_old" class="message-text">n/a</span>
-              <input type="text" id="midi_note_write_new" class="message-text-input" value="n/a">
+              <input type="number"  min="-1" max="127 "id="midi_note_write_new" class="message-text-input" value="-1">
             </div>
             <!-- Repeat the above button code 21 more times to create a 5x5 grid -->
           </div>
@@ -170,7 +173,7 @@
       </div>
       <div class="element">
         Logs:
-        <ol id="serial-messages-container"></ol>
+        <ol id="logs-container"></ol>
       </div>
     </section>
   </main>
