@@ -20,7 +20,7 @@
   "scripts": {
     "build-webpack": "webpack --mode development",
     "build-webpack:prod": "webpack --mode production",
-    "build": "tsc",
+    "build": "concurrently \"tsc\" \"webpack --mode production\"",
     "start": "http-server -c-1",
     "open-chrome": "start chrome http://localhost:8080",
     "watch": "nodemon --watch src --ext ts --exec npm run build-webpack",
