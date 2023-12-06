@@ -58,6 +58,15 @@ button:focus {
   justify-content: center;
 }
 
+
+.po-button-config-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr; /* Set the height of each row to be equal */
+  grid-gap: 0.625rem;
+  justify-content: center;
+}
+
 .po-button-config-grid div {
   display: flex;
   flex-direction: column;
@@ -67,9 +76,21 @@ button:focus {
   border-radius: 0.25rem;
   justify-content: center;
   text-align: center;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 
+
+.po-button-config-grid-4 div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-background);
+  color: var(--color-background-light);
+  border-radius: 0.25rem;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 1rem;
+}
 
 .element {
   margin: 1.5rem 3rem;
@@ -83,7 +104,7 @@ grid-element {
 }
 
 .grid-container {
-  width: 50%; /* Set the width to 50% of the page */
+  width: 60%; /* Set the width to 50% of the page */
   margin: 0 auto; /* Center the grid container horizontally */
   justify-content: center;
 }
@@ -100,6 +121,7 @@ grid-element {
   width: 1.5rem; 
   border-radius: 0.25rem;
   color: red;
+  font-size: 0.75rem;
 }
 
 label {

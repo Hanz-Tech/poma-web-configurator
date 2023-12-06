@@ -7,60 +7,60 @@ import { configInterface } from './default.js';
 const schema: JSONSchemaType<configInterface> = {
     type: "object",
     properties: {
-      midi_note_1: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_2: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_3: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_4: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_5: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_6: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_7: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_8: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_9: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_10: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_11: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_12: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_13: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_14: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_15: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_16: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_sound: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_pattern: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_bpm: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_special: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_fx: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_play: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_write: { type: "integer", minimum: -1, maximum: 127 },
-      po_midi_channel: { type: "integer", minimum: -1, maximum: 127 },
-      disable_transport: { type: "integer", minimum: 0, maximum: 1 },
-      po_cc_control: { type: "integer", minimum: 0, maximum: 1 },
-      volca_fm_velocity: { type: "integer", minimum: 0, maximum: 1 },
-      volca_fm_midi_ch_1: { type: "integer", minimum: 1, maximum: 16 },
-      volca_fm_midi_ch_2: { type: "integer", minimum: 1, maximum: 16 },
-      sync_out_enabled: { type: "integer", minimum: 0, maximum: 1 },
-      midi_ppqn: { type: "integer", minimum: 0, maximum: 72 },
-      midi_note_record_1: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_2: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_3: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_4: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_5: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_6: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_7: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_8: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_9: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_10: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_11: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_12: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_13: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_14: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_15: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_record_16: { type: "integer", minimum: -1, maximum: 127 },
-      looper_enabled: { type: "integer", minimum: 0, maximum: 1 },
-      looper_autoplay_after_record: { type: "integer", minimum: 0, maximum: 1 },
-      looper_transport_control_link: { type: "integer", minimum: 0, maximum: 1 },
-      midi_note_loop_start_stop: { type: "integer", minimum: -1, maximum: 127 },
-      midi_note_loop_clear:{ type: "integer", minimum: -1, maximum: 127 },
-      looper_quantized: { type: "integer", minimum: 0 , maximum: 1 },
-      ble_midi_enabled: { type: "integer", minimum: 0, maximum: 1 }
+      midi_note_1: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_2: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_3: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_4: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_5: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_6: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_7: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_8: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_9: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_10: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_11: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_12: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_13: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_14: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_15: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_16: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_sound: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_pattern: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_bpm: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_special: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_fx: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_play: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_write: {  "$ref": "#/definitions/midi_note_type" },
+      po_midi_channel: {  "$ref": "#/definitions/midi_channel" },
+      disable_transport: {"$ref": "#/definitions/boolean" },
+      po_cc_control: {"$ref": "#/definitions/boolean" },
+      volca_fm_velocity: {"$ref": "#/definitions/boolean" },
+      volca_fm_midi_ch_1: { "$ref": "#/definitions/midi_channel" },
+      volca_fm_midi_ch_2: { "$ref": "#/definitions/midi_channel"},
+      sync_out_enabled: {"$ref": "#/definitions/boolean" },
+      midi_ppqn: { type: "integer", minimum: 0, maximum: 255 },
+      midi_note_record_1: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_2: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_3: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_4: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_5: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_6: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_7: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_8: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_9: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_10: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_11: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_12: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_13: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_14: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_15: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_record_16: {  "$ref": "#/definitions/midi_note_type" },
+      looper_enabled: {"$ref": "#/definitions/boolean" },
+      looper_autoplay_after_record: {"$ref": "#/definitions/boolean" },
+      looper_transport_control_link: {"$ref": "#/definitions/boolean" },
+      midi_note_loop_start_stop: {  "$ref": "#/definitions/midi_note_type" },
+      midi_note_loop_clear:{  "$ref": "#/definitions/midi_note_type" },
+      looper_quantized: {"$ref": "#/definitions/boolean"},
+      ble_midi_enabled: {"$ref": "#/definitions/boolean" }
     },
     required: [
         "midi_note_1",
@@ -120,6 +120,47 @@ const schema: JSONSchemaType<configInterface> = {
       // Add all other properties to the required list as needed
       // ...
     ],
+    "definitions": {
+      "midi_note_type": {
+        "oneOf": [
+          {
+            "type": "integer",
+            "minimum": -1,
+            "maximum": 127
+          },
+          {
+            "type": "integer",
+            "enum": [255]
+          }
+        ]
+      },
+      "boolean": {
+        "oneOf": [
+          {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          },
+          {
+            "type": "integer",
+            "enum": [255]
+          }
+        ]
+      },
+      "midi_channel": {
+        "oneOf": [
+          {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 16
+          },
+          {
+            "type": "integer",
+            "enum": [255]
+          }
+        ]
+      }
+    },
     additionalProperties: true
 }
 
