@@ -123,6 +123,11 @@ class App {
       this.fileInput.click(); // Simulate click on the hidden file input when the button is clicked
     })
 
+    //Export File
+    this.exportConfigFileButton.addEventListener('pointerdown', async () => {
+      this.downloadJson(this.currentDeviceConfig, "config.json")
+    })
+
     //Copy Config
     this.copyConfigButton.addEventListener('pointerdown', async () => {
       this.updateConfigWebpage(this.currentDeviceConfig, "_new");
@@ -188,6 +193,34 @@ class App {
     } else {
       this.printToLogs('Error validating JSON:' + JSON.stringify(validateConfig.errors));
     }
+  }
+
+  downloadJson(jsonData: any, fileName: string): void {
+    // Convert JSON data to string
+    const jsonString = JSON.stringify(jsonData,null,2);
+    console.log(jsonString)
+  
+    // Create a Blob from the JSON string
+    const blob = new Blob([jsonString], { type: 'application/json' });
+  
+    // Create a link element
+    const link = document.createElement('a');
+  
+    // Set link's href to point to the Blob
+    link.href = URL.createObjectURL(blob);
+  
+    // Set the download attribute to the desired file name
+    link.download = fileName;
+  
+    // Append link to the body
+    document.body.appendChild(link);
+  
+    // Dispatch click event on the link
+    // This is what triggers the file download
+    link.click();
+  
+    // Clean up and remove the link
+    link.parentNode!.removeChild(link);
   }
 
   async getSerialMessage() {
