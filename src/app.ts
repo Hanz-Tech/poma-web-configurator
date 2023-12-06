@@ -1,5 +1,5 @@
 import { serialHandler } from './serial-handler';
-import { eepromAddresses, defaultConfig } from './default';
+import { defaultConfig } from './default';
 import {validateConfig} from './validator'
 import { compareJSONObjects } from './helper';
 /**
@@ -36,12 +36,17 @@ class App {
   isConnected: boolean = false
   constructor() {
     this.connectButtonElem.addEventListener('pointerdown', async () => {
-      this.isInit = await serialHandler.init();
-      (this.readFromPoButton as HTMLButtonElement).removeAttribute('disabled');
-      // this.updateConfigWebpage(this.currentConfig);
-      (this.connectButtonElem as HTMLButtonElement).setAttribute('disabled', "true")
-      this.printToLogs("Connected to Device")
-      this.isConnected = true
+      try {
+        this.isInit = await serialHandler.init();
+        (this.readFromPoButton as HTMLButtonElement).removeAttribute('disabled');
+        // this.updateConfigWebpage(this.currentConfig);
+        (this.connectButtonElem as HTMLButtonElement).setAttribute('disabled', "true")
+        this.printToLogs("Connected to Device")
+        this.isConnected = true
+      } catch (err){
+        alert("Failed to open serial port. Make sure it's not in use by another program");
+      }
+
     })
     this.fileInput.addEventListener('change', (event) => {
       const files = (event.target as HTMLInputElement).files;

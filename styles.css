@@ -1,6 +1,6 @@
 :root {
-  --color-active: #a06ea0;
-  --color-primary: #e28cb1;
+  --color-active: #815b19;
+  --color-primary: rgb(180, 114, 28);
   --color-background: #302f36;
   --color-background-light  : rgba(255, 255, 255, 0.1);
   --color-primary-light: #d7d6da;
@@ -67,6 +67,34 @@ button:focus {
   justify-content: center;
 }
 
+
+.po-button-config-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr; /* Set the height of each row to be equal */
+  grid-gap: 0.625rem;
+  justify-content: center;
+}
+
+.po-general-config-container-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* This creates a single column */
+  grid-gap: 0.625rem; /* Space between rows */
+  /* ... other styles ... */
+}
+
+.po-general-config-container-grid div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--color-background);
+  color: var(--color-background-light);
+  border-radius: 0.25rem;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
 .po-button-config-grid div {
   display: flex;
   flex-direction: column;
@@ -92,6 +120,18 @@ button:focus {
   padding-bottom: 1rem;
 }
 
+.po-button-config-grid-3 div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-background);
+  color: var(--color-background-light);
+  border-radius: 0.25rem;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
 .element {
   margin: 1.5rem 3rem;
   background-color: var(--color-background-light);
@@ -104,7 +144,7 @@ grid-element {
 }
 
 .grid-container {
-  width: 60%; /* Set the width to 50% of the page */
+  width: 45%; /* Set the width to 50% of the page */
   margin: 0 auto; /* Center the grid container horizontally */
   justify-content: center;
 }

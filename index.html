@@ -13,7 +13,7 @@
 
   <main>
     <div class="repo-link">
-      <a href="https://github.com/UnJavaScripter/web-serial-example">GitHub Repo</a>
+      <a href="https://github.com/Hanz-Tech/midi-adapter-v3-software/wiki/1.Basic-Usage">User guide</a>
     </div>
     <section class="elements">
       <div class="element">
@@ -23,8 +23,8 @@
           <li>Press Connect, and select the correct device</li>
           <li>Press READ FROM ADAPTER to load config from the PO-MA. The values are <span style="color:green">green</span> </li> 
           <li>Press COPY or LOAD CONFIG FILE to update the <span style="color:red">red</span> values. Make your changes.</li> 
-          <li>Press SAVE TO ADAPTER to send <span style="color:red">red</span> values to the adapter, <span style="color:green">green</span> values will auto update</li>
-          <li>Pesss EXPORT CURRENT CONFIG to export <span style="color:green">green</span> values to a file</li>
+          <li>Press WRITE TO ADAPTER to send <span style="color:red">red</span> values to the adapter, <span style="color:green">green</span> values will auto update</li>
+          <li>Pesss SAVE CONFIG TO FILE to export <span style="color:green">green</span> values to a file</li>
         </ol>
         <div class="read-write-button-container">
           <button class="action-buttons" id="connect-to-serial">Connect</button>
@@ -32,17 +32,55 @@
         </div>
         <div class="read-write-button-container">
           <button class="action-buttons"  id="copy-config-button" disabled="true" >Copy </button>
-          <button class="action-buttons"  id="load-config-button" disabled="true" >Load Config File</button>
-          <input type="file" id="fileInput" style="display: none;" accept=".json" />
+          <button class="action-buttons"  id="save-to-po-button" disabled="true">WRITE to Adapter</button>
         </div>
         <div class="read-write-button-container">
-          <button class="action-buttons"  id="save-to-po-button" disabled="true">Save to Adapter</button>
-          <button class="action-buttons"  id="export-config-button" disabled="true">Export Current Config</button>
+          <button class="action-buttons"  id="load-config-button" disabled="true" >Load Config File</button>
+          <input type="file" id="fileInput" style="display: none;" accept=".json" />
+          <button class="action-buttons"  id="export-config-button" disabled="true">Save Config to File</button>
         </div>
         
       </div>
       <div class="element">
-        <h2>MIDI notes to PO buttons </h2>
+        <h2>General MIDI </h2>
+        <p class="tips">Hover your mouse on each element for more info</p>
+        <div class="grid-container">
+          <div class="po-button-config-grid-3">
+            <div class="grid-element" title="  [1-16] Midi channel for the pocket operator control">
+              <label for="po_midi_channel">po_midi_channel</label>
+              <span id="po_midi_channel_old" class="message-text" >n/a</span>
+              <input type="number" id="po_midi_channel_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title=" [0-1] If set to 0, pressing play on the midi controller will start the loop on the Pocket Operator. Set to 0 to enable the sync out clock output." >
+              <label for="disable_transport">disable_transport</label>
+              <span id="disable_transport_old" class="message-text" >n/a</span>
+              <input type="number" id="disable_transport_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title="[0-1] Changes the mode of operation, See user guide ">
+              <label for="po_cc_control">po_cc_control</label>
+              <span id="po_cc_control_old" class="message-text" >n/a</span>
+              <input type="number" id="po_cc_control_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title=" [0-1] If set to 1, translate midi clock to sync out and send it to the 3.5mm jack">
+              <label for="sync_out_enabled">sync_out_enabled</label>
+              <span id="sync_out_enabled_old" class="message-text" >n/a</span>
+              <input type="number" id="sync_out_enabled_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title="[0-255] Keep at 24" >
+              <label for="midi_ppqn">midi_ppqn</label>
+              <span id="midi_ppqn_old" class="message-text" >n/a</span>
+              <input type="number" id="midi_ppqn_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title="[0-1] Enables/Disables BLE MIDI. For V3 only">
+              <label for="ble_midi_enabled">ble_midi_enabled</label>
+              <span id="ble_midi_enabled_old" class="message-text" >n/a</span>
+              <input type="number" id="ble_midi_enabled_new" class="message-text-input" value="255">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="element">
+        <h2>PO buttons </h2>
         <p class="tips">Assign a MIDI note to trigger PO button. Set value to 255 to ignore assignement</p>
         <div class="grid-container">
           <div class="po-button-config-grid">
@@ -170,96 +208,158 @@
         </div>
       </div>
       <div class="element">
-        <h2>PO33/PO35 Record Shortcut </h2>
-        <p class="tips">Each MIDI note replicate the behavior RECORD + TRACK. Set value to 255 to ignore assignement</p>
+        <h2>PO-33/PO-35 Record Shortcut.</h2>
+        <p class="tips">For POMA V3 only. Each MIDI note replicates the behavior of pressing RECORD + TRACK. Set value to 255 to ignore assignement</p>
         <div class="grid-container">
           <div class="po-button-config-grid-4">
             <div class="grid-element">
-              <label for="midi_note_record_1_new">1</label>
+              <label for="midi_note_record_1_new">Track 1</label>
               <span id="midi_note_record_1_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_1_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_2_new">2</label>
+              <label for="midi_note_record_2_new">Track 2</label>
               <span id="midi_note_record_2_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_2_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_3_new">3</label>
+              <label for="midi_note_record_3_new">Track 3</label>
               <span id="midi_note_record_3_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_3_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_4_new">4</label>
+              <label for="midi_note_record_4_new">Track 4</label>
               <span id="midi_note_record_4_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_4_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_5_new">5</label>
+              <label for="midi_note_record_5_new">Track 5</label>
               <span id="midi_note_record_5_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_5_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_6_new">6</label>
+              <label for="midi_note_record_6_new">Track 6</label>
               <span id="midi_note_record_6_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_6_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_7_new">7</label>
+              <label for="midi_note_record_7_new">Track 7</label>
               <span id="midi_note_record_7_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_7_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_8_new">8</label>
+              <label for="midi_note_record_8_new">Track 8</label>
               <span id="midi_note_record_8_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_8_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_9_new">9</label>
+              <label for="midi_note_record_9_new">Track 9</label>
               <span id="midi_note_record_9_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_9_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_10_new">10</label>
+              <label for="midi_note_record_10_new">Track 10</label>
               <span id="midi_note_record_10_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_10_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_11_new">11</label>
+              <label for="midi_note_record_11_new">Track 11</label>
               <span id="midi_note_record_11_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_11_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_12_new">12</label>
+              <label for="midi_note_record_12_new">Track 12</label>
               <span id="midi_note_record_12_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_12_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_13_new">13</label>
+              <label for="midi_note_record_13_new">Track 13</label>
               <span id="midi_note_record_13_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_13_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_14_new">14</label>
+              <label for="midi_note_record_14_new">Track 14</label>
               <span id="midi_note_record_14_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_14_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_15_new">15</label>
+              <label for="midi_note_record_15_new">Track 15</label>
               <span id="midi_note_record_15_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_15_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element">
-              <label for="midi_note_record_16_new">16</label>
+              <label for="midi_note_record_16_new">Track 16</label>
               <span id="midi_note_record_16_old" class="message-text">n/a</span>
               <input type="number" id="midi_note_record_16_new" class="message-text-input" value="255">
             </div>
-            <!-- Repeat the above button code 21 more times to create a 5x5 grid -->
           </div>
         </div>
       </div>
       <div class="element">
-        Logs:
+        <h2>Looper Control for PO-33. </h2>
+        <p class="tips">For POMA V3 only. Hover your mouse on each element for more info. See <a href="https://github.com/Hanz-Tech/midi-adapter-v3-software/wiki/2.-Advanced-Usage/">user guide </a></p>
+        <div class="grid-container">
+          <div class="po-button-config-grid-3">
+            <div class="grid-element" title="  [0-1] Disable/Enable Looper">
+              <label for="looper_enabled">looper_enabled</label>
+              <span id="looper_enabled_old" class="message-text" >n/a</span>
+              <input type="number" id="looper_enabled_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title=" [0-1] If set to 1, the loop will auto start to play after the recording ends.
+            " >
+              <label for="looper_autoplay_after_record">looper_autoplay</label>
+              <span id="looper_autoplay_after_record_old" class="message-text" >n/a</span>
+              <input type="number" id="looper_autoplay_after_record_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title="[0-1]  If you want to start/stop the looper with transport keys, set looper_transport_control_link=1 ">
+              <label for="looper_transport_control_link">looper_transport_control</label>
+              <span id="looper_transport_control_link_old" class="message-text" >n/a</span>
+              <input type="number" id="looper_transport_control_link_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title=" [0-127] MIDI note assigned to midi_note_loop_start_stop will allow you to start/stop the loop">
+              <label for="midi_note_loop_start_stop">midi_note_loop_start_stop</label>
+              <span id="midi_note_loop_start_stop_old" class="message-text" >n/a</span>
+              <input type="number" id="midi_note_loop_start_stop_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title="[0-127]  MIDI note to stops the looper and deletes the last recorded loop" >
+              <label for="midi_note_loop_clear">midi_note_loop_clear</label>
+              <span id="midi_note_loop_clear_old" class="message-text" >n/a</span>
+              <input type="number" id="midi_note_loop_clear_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title="[0-1] Enable/Disable looper quantization. By default the looper BPM is set to 120. This will automatically change with MIDI clock">
+              <label for="looper_quantized">looper_quantized</label>
+              <span id="looper_quantized_old" class="message-text" >n/a</span>
+              <input type="number" id="looper_quantized_new" class="message-text-input" value="255">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="element">
+        <h2>Volca FM</h2>
+        <p class="tips"> Hover your mouse on each element for more info. See <a href="https://github.com/Hanz-Tech/midi-adapter-v3-software/wiki/2.-Advanced-Usage/">user guide </a></p>
+        <div class="grid-container">
+          <div class="po-button-config-grid-3">
+            <div class="grid-element" title="  [0-1]  if set to 1, enable note velocity for volca FM">
+              <label for="volca_fm_velocity">volca_fm_velocity</label>
+              <span id="volca_fm_velocity_old" class="message-text" >n/a</span>
+              <input type="number" id="volca_fm_velocity_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title=" [1-16] MIDI channel to Volca FM
+            " >
+              <label for="volca_fm_midi_ch_1">volca_fm_midi_ch_1</label>
+              <span id="volca_fm_midi_ch_1_old" class="message-text" >n/a</span>
+              <input type="number" id="volca_fm_midi_ch_1_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title="[1-16] MIDI channel to Volca FM">
+              <label for="volca_fm_midi_ch_2">volca_fm_midi_ch_2</label>
+              <span id="volca_fm_midi_ch_2_old" class="message-text" >n/a</span>
+              <input type="number" id="volca_fm_midi_ch_2_new" class="message-text-input" value="255">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="element">
+        <h2>Logs</h2>
         <ol id="logs-container"></ol>
       </div>
     </section>

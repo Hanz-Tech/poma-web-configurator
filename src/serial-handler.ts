@@ -61,6 +61,7 @@ class SerialHandler {
         return true
       } catch(err) {
         console.error('There was an error opening the serial port:', err);
+        throw err;
         return false
       }
 
@@ -100,7 +101,6 @@ class SerialHandler {
       if (tryParseJSONObject(completeMessage)){
         break;
       }
-      
     }
     return completeMessage
   }
@@ -113,7 +113,6 @@ class SerialHandler {
         });
     } catch (err) {
           throw err;
-
     } 
   }
 }
