@@ -19,7 +19,7 @@
       <div class="element">
         <ol class="myUL">
           <li>Remove the PO-MA from the Pocket Operator,Remove SD card</li>
-          <li>Attach the PO-MA to your PC thru USB</li>
+          <li>Attach the PO-MA to your PC thru USB, wait for the led to blink once and then in quick succession</li>
           <li>Press Connect, and select the correct device</li>
           <li>Press READ FROM ADAPTER to load config from the PO-MA. The values are <span style="color:green">green</span> </li> 
           <li>Press COPY or LOAD CONFIG FILE to update the <span style="color:red">red</span> values. Make your changes.</li> 
@@ -40,6 +40,17 @@
           <button class="action-buttons"  id="export-config-button" disabled="true">Save Config to File</button>
         </div>
         
+      </div>
+      <div class="element">
+        <!-- <h2>Version </h2> -->
+        <div class="grid-container">
+          <div class="po-button-config-grid-1">
+            <div class="grid-element" title="  [1-16] Midi channel for the pocket operator control">
+              <label for="version">Firmware version</label>
+              <span id="version_old" class="message-text" >n/a</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="element">
         <h2>General MIDI </h2>

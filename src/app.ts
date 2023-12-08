@@ -174,6 +174,29 @@ class App {
     return configCopy
   }
 
+  timeout(delay: number) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(new Error('Operation timed out'));
+        }, delay);
+    });
+  }
+
+  async readWithTimeout(serialHandler: any, timeoutDuration: number): Promise<string> {
+    try {
+        // Promise.race will resolve or reject with the value from the first promise that resolves or rejects
+        const response = await Promise.race([
+            serialHandler.read(),
+            this.timeout(timeoutDuration)
+        ]);
+        return response;
+    } catch (error: any) {
+        this.printToLogs(error.message);
+        // Handle timeout or other errors
+        throw error; // Rethrow if you want to handle it further up the call stack
+    }
+}
+
   //Read config values from device
   async readAll(){
     const command = {
@@ -181,7 +204,7 @@ class App {
       data : {}
     };
     await serialHandler.write(JSON.stringify(command));
-    const response = await serialHandler.read();
+    const response = await this.readWithTimeout(serialHandler, 2000)
     const loadedConfig: configMap = JSON.parse(response)
     if(validateConfig(loadedConfig)){
       this.currentDeviceConfig = loadedConfig

@@ -86,6 +86,8 @@ class SerialHandler {
    * Gets data from the `reader`, decodes it and returns it inside a promise.
    * @returns A promise containing either the message from the `reader` or an error.
    */
+
+  
   async read(): Promise<string> {
     let completeMessage = ""
     while (true) {
@@ -99,11 +101,13 @@ class SerialHandler {
       // value is a string.
       completeMessage += value
       if (tryParseJSONObject(completeMessage)){
+        
         break;
       }
     }
     return completeMessage
   }
+
   async _requestPort(): Promise<SerialPort> {
     try {
         return await navigator.serial.requestPort({
