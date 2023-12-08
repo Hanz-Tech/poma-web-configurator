@@ -174,14 +174,14 @@ grid-element {
 }
 
 .message-text-input {
-  padding: 0.313rem;
+  padding: 0.5rem;
   margin-top: 0.313rem;
   background-color: var(--color-background);
   text-align: center; /* Center the text within the input */
-  width: 1.5rem; 
+  width: 1.7rem; 
   border-radius: 0.25rem;
   color: red;
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 label {
@@ -217,7 +217,7 @@ ol {
 }
 
 .message-text {
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: green;
   margin-top: 0.5rem;
 }
