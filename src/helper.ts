@@ -31,3 +31,19 @@ export function compareJSONObjects(obj1: { [key: string]: JSONValue }, obj2: { [
 
   return differences;
 }
+
+
+export function parseCFGFile(content: string): Record<string, number> {
+  const configObject: Record<string, number> = {};
+  const lines = content.split(/\r?\n/); // Split the file content by new line
+
+  lines.forEach(line => {
+      const [key, value] = line.split('='); // Split each line by the '=' character
+      if (key && value) {
+          configObject[key.trim()] = parseInt(value.trim(), 10);
+      }
+  });
+
+  return configObject;
+}
+

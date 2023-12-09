@@ -60,7 +60,8 @@ const schema: JSONSchemaType<configInterface> = {
       midi_note_loop_start_stop: {  "$ref": "#/definitions/midi_note_type" },
       midi_note_loop_clear:{  "$ref": "#/definitions/midi_note_type" },
       looper_quantized: {"$ref": "#/definitions/boolean"},
-      ble_midi_enabled: {"$ref": "#/definitions/boolean" }
+      ble_midi_enabled: {"$ref": "#/definitions/boolean" },
+      midi_cc_knob_9: {  "$ref": "#/definitions/midi_cc_type" }
     },
     required: [
         "midi_note_1",
@@ -117,6 +118,7 @@ const schema: JSONSchemaType<configInterface> = {
         "midi_note_loop_clear",
         "looper_quantized",
         "ble_midi_enabled",
+        "midi_cc_knob_9",
       // Add all other properties to the required list as needed
       // ...
     ],
@@ -125,8 +127,21 @@ const schema: JSONSchemaType<configInterface> = {
         "oneOf": [
           {
             "type": "integer",
-            "minimum": -1,
+            "minimum": 0,
             "maximum": 127
+          },
+          {
+            "type": "integer",
+            "enum": [255]
+          }
+        ]
+      },
+      "midi_cc_type": {
+        "oneOf": [
+          {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 119
           },
           {
             "type": "integer",

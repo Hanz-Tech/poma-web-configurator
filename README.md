@@ -1,12 +1,23 @@
 # Pocket Operator MIDI Adapter Web Config
 
-Simple app to configure the PO Midi Adapter through a web app using Web Serial API
+Simple app to configure the PO Midi Adapter through a web app using Web Serial API and Typescript
 
+Demo : https://pomawebconfig.hanztechnology.com/
 
 # Dev mode
 ```
 npm install
 npm run dev
+```
+
+# Build
+```
+npm run build
+```
+
+# Deploy 
+```
+./deploy.sh
 ```
 
 ### Browser compatibility

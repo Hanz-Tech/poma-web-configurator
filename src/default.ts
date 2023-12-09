@@ -54,7 +54,8 @@ export const defaultConfig = {
     "midi_note_loop_start_stop": 0,
     "midi_note_loop_clear": 0,
     "looper_quantized": 0,
-    "ble_midi_enabled": 0
+    "ble_midi_enabled": 0 ,
+    "midi_cc_knob_9": 0
   }
   export interface configInterface {
     "midi_note_1": number;
@@ -111,4 +112,5 @@ export const defaultConfig = {
     "midi_note_loop_clear": number;
     "looper_quantized": number;
     "ble_midi_enabled": number;
+    "midi_cc_knob_9": number;
 }

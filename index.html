@@ -21,8 +21,8 @@
           <li>Remove the PO-MA from the Pocket Operator,Remove SD card</li>
           <li>Attach the PO-MA to your PC thru USB, wait for 10 secs until the LED blink in quick succession</li>
           <li>Press Connect, and select the correct device</li>
-          <li>Press READ FROM ADAPTER to load config from the PO-MA. The values are <span style="color:green">green</span> </li> 
-          <li>Press COPY or LOAD CONFIG FILE to update the <span style="color:red">red</span> values. Make your changes.</li> 
+          <li>Press READ FROM ADAPTER to load config from the PO-MA. </li> 
+          <li>Press Make your changesto the <span style="color:red">red</span> values.You can also load in a <a href="https://raw.githubusercontent.com/Hanz-Tech/midi-adapter-v3-software/master/config.cfg">.cfg </a> or <a href="https://raw.githubusercontent.com/Hanz-Tech/midi-adapter-v3-software/master/config.json">.json</a> file </li> 
           <li>Press WRITE TO ADAPTER to send <span style="color:red">red</span> values to the adapter, <span style="color:green">green</span> values will auto update</li>
           <li>Pesss SAVE CONFIG TO FILE to export <span style="color:green">green</span> values to a file</li>
         </ol>
@@ -31,12 +31,12 @@
           <button class="action-buttons"  id="read-from-po-button" disabled="true">Read From Adapter</button>
         </div>
         <div class="read-write-button-container">
-          <button class="action-buttons"  id="copy-config-button" disabled="true" >Copy </button>
+          <!-- <button class="action-buttons"  id="copy-config-button" disabled="true" >Copy </button> -->
           <button class="action-buttons"  id="save-to-po-button" disabled="true">WRITE to Adapter</button>
         </div>
         <div class="read-write-button-container">
           <button class="action-buttons"  id="load-config-button" disabled="true" >Load Config File</button>
-          <input type="file" id="fileInput" style="display: none;" accept=".json" />
+          <input type="file" id="fileInput" style="display: none;" accept=".json,.cfg" />
           <button class="action-buttons"  id="export-config-button" disabled="true">Save Config to File</button>
         </div>
         
@@ -56,7 +56,7 @@
         <h2>General MIDI </h2>
         <p class="tips">Hover your mouse on each element for more info</p>
         <div class="grid-container">
-          <div class="po-button-config-grid-3">
+          <div class="po-button-config-grid-4">
             <div class="grid-element" title="  [1-16] Midi channel for the pocket operator control">
               <label for="po_midi_channel">po_midi_channel</label>
               <span id="po_midi_channel_old" class="message-text" >n/a</span>
@@ -71,6 +71,11 @@
               <label for="po_cc_control">po_cc_control</label>
               <span id="po_cc_control_old" class="message-text" >n/a</span>
               <input type="number" id="po_cc_control_new" class="message-text-input" value="255">
+            </div>
+            <div class="grid-element" title="[0-119] Midi CC, the CC value changes the behavior the midi_notes. See user guide, set to 255 to ignore assignment">
+              <label for="midi_cc_knob_9 ">midi_cc_knob_9 </label>
+              <span id="midi_cc_knob_9_old" class="message-text" >n/a</span>
+              <input type="number" id="midi_cc_knob_9_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title=" [0-1] If set to 1, translate midi clock to sync out and send it to the 3.5mm jack">
               <label for="sync_out_enabled">sync_out_enabled</label>

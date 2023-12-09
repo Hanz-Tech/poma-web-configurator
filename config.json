@@ -52,5 +52,6 @@
     "midi_note_loop_start_stop": 49,
     "midi_note_loop_clear": 50,
     "looper_quantized": 1,
-    "ble_midi_enabled": 1
+    "ble_midi_enabled": 1,
+    "midi_cc_knob_9": 1
   }
