@@ -6,6 +6,7 @@ Demo : https://pomawebconfig.hanztechnology.com/
 
 # Dev mode
 ```
+npm install typescript
 npm install
 npm run dev
 ```

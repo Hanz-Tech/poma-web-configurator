@@ -38,11 +38,13 @@ class App {
     this.connectButtonElem.addEventListener('pointerdown', async () => {
       try {
         this.isInit = await serialHandler.init();
-        (this.readFromPoButton as HTMLButtonElement).removeAttribute('disabled');
-        // this.updateConfigWebpage(this.currentConfig);
-        (this.connectButtonElem as HTMLButtonElement).setAttribute('disabled', "true")
-        this.printToLogs("Connected to Device")
-        this.isConnected = true
+        if(this.isInit){
+          (this.readFromPoButton as HTMLButtonElement).removeAttribute('disabled');
+          // this.updateConfigWebpage(this.currentConfig);
+          (this.connectButtonElem as HTMLButtonElement).setAttribute('disabled', "true")
+          this.printToLogs("Connected to Device")
+          this.isConnected = true
+        }
       } catch (err){
         alert("Failed to open serial port. Make sure it's not in use by another program");
       }
