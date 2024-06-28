@@ -59,37 +59,37 @@
         <div class="grid-container">
           <div class="po-button-config-grid-4">
             <div class="grid-element" title="  [1-16] Midi channel for the pocket operator control">
-              <label for="po_midi_channel">po_midi_channel</label>
+              <label for="po_midi_channel" class="one-line-text">po_midi_channel</label>
               <span id="po_midi_channel_old" class="message-text" >n/a</span>
               <input type="number" id="po_midi_channel_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title=" [0-1] If set to 0, pressing play on the midi controller will start the loop on the Pocket Operator. Set to 0 to enable the sync out clock output." >
-              <label for="disable_transport">disable_transport</label>
+              <label for="disable_transport" class="one-line-text">disable_transport</label>
               <span id="disable_transport_old" class="message-text" >n/a</span>
               <input type="number" id="disable_transport_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title="[0-1] Changes the mode of operation, See user guide ">
-              <label for="po_cc_control">po_cc_control</label>
+              <label for="po_cc_control" class="one-line-text" >po_cc_control</label>
               <span id="po_cc_control_old" class="message-text" >n/a</span>
               <input type="number" id="po_cc_control_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title="[0-119] Midi CC, the CC value changes the behavior the midi_notes. See user guide, set to 255 to ignore assignment">
-              <label for="midi_cc_knob_9 ">midi_cc_knob_9 </label>
+              <label for="midi_cc_knob_9" class="one-line-text">midi_cc_knob_9 </label>
               <span id="midi_cc_knob_9_old" class="message-text" >n/a</span>
               <input type="number" id="midi_cc_knob_9_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title=" [0-1] If set to 1, translate midi clock to sync out and send it to the 3.5mm jack">
-              <label for="sync_out_enabled">sync_out_enabled</label>
+              <label for="sync_out_enabled" class="one-line-text">sync_out_enabled</label>
               <span id="sync_out_enabled_old" class="message-text" >n/a</span>
               <input type="number" id="sync_out_enabled_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title="[0-255] Keep at 24" >
-              <label for="midi_ppqn">midi_ppqn</label>
+              <label for="midi_ppqn" class="one-line-text">midi_ppqn</label>
               <span id="midi_ppqn_old" class="message-text" >n/a</span>
               <input type="number" id="midi_ppqn_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title="[0-1] Enables/Disables BLE MIDI. For V3 only">
-              <label for="ble_midi_enabled">ble_midi_enabled</label>
+              <label for="ble_midi_enabled" class="one-line-text">ble_midi_enabled</label>
               <span id="ble_midi_enabled_old" class="message-text" >n/a</span>
               <input type="number" id="ble_midi_enabled_new" class="message-text-input" value="255">
             </div>
@@ -318,33 +318,33 @@
         <div class="grid-container">
           <div class="po-button-config-grid-3">
             <div class="grid-element" title="  [0-1] Disable/Enable Looper">
-              <label for="looper_enabled">looper_enabled</label>
+              <label for="looper_enabled" class="one-line-text">looper_enabled</label>
               <span id="looper_enabled_old" class="message-text" >n/a</span>
               <input type="number" id="looper_enabled_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title=" [0-1] If set to 1, the loop will auto start to play after the recording ends.
             " >
-              <label for="looper_autoplay_after_record">looper_autoplay</label>
+              <label for="looper_autoplay_after_record" class="one-line-text-looper">looper_autoplay</label>
               <span id="looper_autoplay_after_record_old" class="message-text" >n/a</span>
               <input type="number" id="looper_autoplay_after_record_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title="[0-1]  If you want to start/stop the looper with transport keys, set looper_transport_control_link=1 ">
-              <label for="looper_transport_control_link">looper_transport_control</label>
+              <label for="looper_transport_control_link" class="one-line-text-looper">looper_transport_control</label>
               <span id="looper_transport_control_link_old" class="message-text" >n/a</span>
               <input type="number" id="looper_transport_control_link_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title=" [0-127] MIDI note assigned to midi_note_loop_start_stop will allow you to start/stop the loop">
-              <label for="midi_note_loop_start_stop">midi_note_loop_start_stop</label>
+              <label for="midi_note_loop_start_stop" class="one-line-text-looper">midi_note_loop_start_stop</label>
               <span id="midi_note_loop_start_stop_old" class="message-text" >n/a</span>
               <input type="number" id="midi_note_loop_start_stop_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title="[0-127]  MIDI note to stops the looper and deletes the last recorded loop" >
-              <label for="midi_note_loop_clear">midi_note_loop_clear</label>
+              <label for="midi_note_loop_clear" class="one-line-text-looper">midi_note_loop_clear</label>
               <span id="midi_note_loop_clear_old" class="message-text" >n/a</span>
               <input type="number" id="midi_note_loop_clear_new" class="message-text-input" value="255">
             </div>
             <div class="grid-element" title="[0-1] Enable/Disable looper quantization. By default the looper BPM is set to 120. This will automatically change with MIDI clock">
-              <label for="looper_quantized">looper_quantized</label>
+              <label for="looper_quantized" class="one-line-text-looper">looper_quantized</label>
               <span id="looper_quantized_old" class="message-text" >n/a</span>
               <input type="number" id="looper_quantized_new" class="message-text-input" value="255">
             </div>
@@ -387,7 +387,7 @@
   <script src="./dist/bundle.js" type="module"></script>
 
   <footer>
-    <p><a href="https://hanztechnology.com/">Hanz Tech</a> &copy; 2023 </p>
+    <p><a href="https://hanztechnology.com/">Hanz Tech</a> &copy; 2024 </p>
 </footer>
 </body>
 </html>

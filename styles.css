@@ -61,7 +61,7 @@ button:focus {
 
 .po-button-config-grid-4 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 2fr);
   grid-auto-rows: 1fr; /* Set the height of each row to be equal */
   grid-gap: 0.625rem;
   justify-content: center;
@@ -252,4 +252,12 @@ input[type=number] {
   padding: 10px;
   list-style-type: none;
   margin: 0;
+}
+
+.one-line-text {
+  font-size: 0.73rem;
+}
+
+.one-line-text-looper {
+  font-size: 0.69rem;
 }
